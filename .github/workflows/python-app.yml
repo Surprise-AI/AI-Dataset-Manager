@@ -1,32 +1,35 @@
-name: Python application
+name: Python application workflow
 
 on:
   push:
     branches:
-      - main  # سيقوم بتشغيل الإجراءات فقط عند دفع التغييرات إلى الفرع "main"
+      - main  # يبدأ العمل عند الدفع إلى فرع "main"
+  pull_request:
+    branches:
+      - main  # يبدأ العمل عند إنشاء طلب سحب إلى فرع "main"
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # البيئة التي ستعمل عليها الإجراءات
+    runs-on: ubuntu-latest  # تشغيل على نظام Ubuntu
 
     strategy:
       matrix:
-        python-version: [3.8, 3.9, 3.10]  # استخدم إصدارات مدعومة فقط
+        python-version: [3.8, 3.9, 3.10]  # إصدارات Python المدعومة
 
     steps:
-    - name: Check out the code
-      uses: actions/checkout@v2  # يقوم بتحميل الكود من GitHub
-      
+    - name: Checkout code
+      uses: actions/checkout@v2  # تحميل الكود المصدري من المستودع
+
     - name: Set up Python
-      uses: actions/setup-python@v2  # يجهز بيئة Python المناسبة
+      uses: actions/setup-python@v2  # إعداد إصدار Python
       with:
-        python-version: ${{ matrix.python-version }}  # يستخدم الإصدار من "matrix"
+        python-version: ${{ matrix.python-version }}
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; else echo "No requirements.txt file found."; fi  # التحقق من وجود الملف
+        python -m pip install --upgrade pip  # تحديث pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; else echo "No requirements.txt file found."; fi
 
     - name: Run tests
       run: |
-        pytest  # يشغل الاختبارات باستخدام pytest
+        pytest  # تشغيل الاختبارات باستخدام pytest
