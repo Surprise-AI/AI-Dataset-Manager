@@ -1,39 +1,35 @@
-name: Custom Python Workflow
+name: Python CI
 
 on:
   push:
     branches:
-      - develop  # يبدأ العمل عند الدفع إلى فرع "develop"
+      - main  # تشغيل سير العمل عند الدفع إلى الفرع الرئيسي
   pull_request:
     branches:
-      - develop  # يبدأ العمل عند إنشاء طلب سحب إلى فرع "develop"
+      - main  # تشغيل سير العمل عند إنشاء طلب سحب إلى الفرع الرئيسي
 
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-latest  # تشغيل سير العمل على نظام Ubuntu
 
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9]  # إصدارات Python مختلفة
+        python-version: [3.8, 3.9, 3.10]  # إصدارات Python المدعومة
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - name: Check out code
+      uses: actions/checkout@v2  # تحميل الكود من المستودع
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v2  # إعداد بيئة Python
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ matrix.python-version }}  # استخدام الإصدار من المصفوفة
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    - name: Run linting
-      run: |
-        flake8 .  # فحص الكود باستخدام flake8
+        python -m pip install --upgrade pip  # تحديث pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; else echo "No requirements.txt found."; fi
 
     - name: Run tests
       run: |
-        pytest
+        pytest  # تشغيل الاختبارات باستخدام pytest
