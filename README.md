@@ -100,3 +100,27 @@ This project is licensed under the MIT License.
 🌍 Join Us
 
 Follow us on GitHub and help us grow the AI community!
+
+🏆 Publish to PyPI
+
+To make AI-Dataset-Manager easily installable via pip, follow these steps:
+
+1. Make sure you have a setup.py file in the root of your repository.
+
+
+2. Use the following command to build and publish the tool to PyPI:
+
+python setup.py sdist bdist_wheel
+twine upload dist/*
+
+
+
+This will upload your package to PyPI so others can install it with pip install ai-dataset-manager.
+
+🌱 Open Community for Contribution
+
+We are building an open and welcoming community for everyone interested in AI and dataset management!
+
+You can help by reporting issues, reviewing pull requests, or even suggesting new features.
+
+Join us on GitHub Discussions to talk about ideas and improvements for AI-Dataset-Manager.
