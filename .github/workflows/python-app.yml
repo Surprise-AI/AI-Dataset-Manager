@@ -25,7 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt  # إذا كنت تستخدم ملف requirements.txt
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; else echo "No requirements.txt file found."; fi  # التحقق من وجود الملف
 
     - name: Run tests
       run: |
