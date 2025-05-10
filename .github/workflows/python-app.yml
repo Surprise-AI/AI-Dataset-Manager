@@ -1,3 +1,7 @@
+a lone, [5/10/2025 10:54 PM]
+git commit -m "Update Python version in GitHub Actions"
+
+a lone, [5/10/2025 11:01 PM]
 name: Python application
 
 on: [push]  # يعني كل ما ترفع تغييرات على الكود (push)، هيشغل الاختبارات
