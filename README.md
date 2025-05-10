@@ -39,6 +39,11 @@ python
   
 
    For detailed documentation and examples, please visit the [Wiki](https://github.com/Surprise-AI/AI-Dataset-Manager/wiki).
+  
+   ## 🧑‍💻 Looking for Contributors!
+     We are actively looking for contributors to help us improve AI-Dataset-Manager!  
+     Check out the [open issues](https://github.com/Surprise-AI/AI-Dataset-Manager/issues) and feel free to pick one.  
+    Your contributions are highly appreciated! 🚀
 
    ## 🤝 Contributing
    We welcome contributions from everyone! To contribute to AI-Dataset-Manager, follow these steps:
