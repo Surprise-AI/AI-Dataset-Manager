@@ -1,10 +1,11 @@
 a lone, [5/10/2025 10:54 PM]
 git commit -m "Update Python version in GitHub Actions"
 
-a lone, [5/10/2025 11:01 PM]
+a lone, [5/10/2025 11:07 PM]
 name: Python application
 
-on: [push]  # يعني كل ما ترفع تغييرات على الكود (push)، هيشغل الاختبارات
+on:
+  push:  # يعني كل ما ترفع تغييرات على الكود (push)، هيشغل الاختبارات
 
 jobs:
   test:
@@ -18,20 +19,16 @@ jobs:
     - name: Check out the code
       uses: actions/checkout@v2  # بيقوم بتحميل الكود من مستودع GitHub
       
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2  # بيجهز بيئة Python المناسبة
       with:
-       python-version: 3.9
-
-    - #name: Set up Python
-      #uses: actions/setup-python@v2  # بيجهز بيئة Python المناسبة
-      #with:
-       # python-version: ${{ matrix.python-version }}
+        python-version: ${{ matrix.python-version }}  # هيختار الإصدار من matrix (3.8 أو 3.9 أو 3.10)
 
     - name: Install dependencies
       run: |
-         python -m pip install --upgrade pip
-       
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # لو عندك ملف dependencies زي requirements.txt
+
     - name: Run tests
       run: |
         pytest  # بيشغل الاختبارات باستخدام pytest
