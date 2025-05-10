@@ -13,11 +13,16 @@ jobs:
     steps:
     - name: Check out the code
       uses: actions/checkout@v2  # بيقوم بتحميل الكود من مستودع GitHub
-
-    - name: Set up Python
-      uses: actions/setup-python@v2  # بيجهز بيئة Python المناسبة
+      
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+       python-version: 3.9
+
+    - #name: Set up Python
+      #uses: actions/setup-python@v2  # بيجهز بيئة Python المناسبة
+      #with:
+       # python-version: ${{ matrix.python-version }}
 
     - name: Install dependencies
       run: |
