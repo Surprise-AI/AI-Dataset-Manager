@@ -1,4 +1,4 @@
-mport json
+import json
 import pandas as pd  # مكتبة pandas لمعالجة البيانات في تنسيق CSV
 
 def save_json(data, file_path):
