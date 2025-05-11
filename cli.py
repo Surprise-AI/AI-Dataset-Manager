@@ -22,5 +22,5 @@ def main():
         elif args.file_type == "csv":
             save_csv({}, args.file_path)  # حفظ البيانات بشكل فارغ كمثال
 
-if name == "main":
+if __name__ == "__main__":
     main()
