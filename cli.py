@@ -1,3 +1,4 @@
+import json
 import argparse
 from ai_dataset_manager.data_format_support import save_json, save_csv  # استيراد دوال الحفظ
 from ai_dataset_manager.data_management import add_data_to_json, add_data_to_csv  # استيراد دوال إضافة البيانات
