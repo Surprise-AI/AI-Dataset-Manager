@@ -1,9 +1,9 @@
 import argparse
 import json
-from ai_dataset_manager.data_management import add_data_to_json, add_data_to_csv  # استيراد الدوال اللازمة
+from ai_dataset_manager.data_management import add_data_to_json, add_data_to_csv, save_json, save_csv  # استيراد الدوال اللازمة
 
 def main():
-    parser = argparse.ArgumentParser(description="إضافة البيانات إلى ملف JSON أو CSV")
+    parser = argparse.ArgumentParser(description="إضافة البيانات أو حفظها في ملف JSON أو CSV")
     
     # إضافة الخيار save و add
     parser.add_argument('action', choices=['save', 'add'], help="العملية التي تريد تنفيذها")
@@ -23,7 +23,17 @@ def main():
             data = json.loads(args.data)
             add_data_to_csv(data, args.file_path)  # إضافة البيانات إلى ملف CSV
         else:
-            print("تنسيق الملف غير مدعوم بعد.")  # في حال كان التنسيق غير مدعوم
+            print("تنسيق الملف غير مدعوم بعد.")
+    
+    elif args.action == 'save':
+        if args.format == 'json':
+            # حفظ البيانات في ملف JSON
+            save_json({}, args.file_path)  # يمكن تعديل البيانات حسب الحاجة
+        elif args.format == 'csv':
+            # حفظ البيانات في ملف CSV
+            save_csv({}, args.file_path)  # يمكن تعديل البيانات حسب الحاجة
+        else:
+            print("تنسيق الملف غير مدعوم بعد.")
 
 
 if __name__ == "__main__":
