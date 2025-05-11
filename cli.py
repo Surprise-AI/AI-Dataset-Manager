@@ -1,6 +1,6 @@
 import argparse
 import json
-from ai_dataset_manager.data_management import add_data_to_json  # فقط استيراد الدالة التي تم إنشاؤها
+from ai_dataset_manager.data_management import add_data_to_json, add_data_to_csv  # استيراد الدوال اللازمة
 
 def main():
     parser = argparse.ArgumentParser(description="إضافة البيانات إلى ملف JSON أو CSV")
@@ -18,8 +18,13 @@ def main():
             # تحويل البيانات من سلسلة إلى قاموس
             data = json.loads(args.data)
             add_data_to_json(data, args.file_path)  # إضافة البيانات إلى ملف JSON
+        elif args.format == 'csv':
+            # تحويل البيانات من سلسلة إلى قاموس
+            data = json.loads(args.data)
+            add_data_to_csv(data, args.file_path)  # إضافة البيانات إلى ملف CSV
         else:
-            print("الدعم لإضافة البيانات في CSV غير مفعّل بعد.")
+            print("تنسيق الملف غير مدعوم بعد.")  # في حال كان التنسيق غير مدعوم
+
 
 if __name__ == "__main__":
     main()
