@@ -14,22 +14,22 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.9]
+        python-version: [3.9]  # خليك على 3.9 طالما مشروعك بسيط
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Check out code
+      uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; else echo "No requirements.txt found."; fi
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; else echo "No requirements.txt found."; fi
 
-      - name: Run tests
-        run: |
-          echo "No tests found. Add pytest or other test commands here."
+    - name: Run tests
+      run: |
+        echo "No tests yet"
