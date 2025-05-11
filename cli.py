@@ -1,5 +1,5 @@
 import argparse
-from ai_dataset_manager import data_format_support
+from ai_dataset_manager.data_format_support import load_json, load_csv, save_json, save_csv  # تعديل الاستيراد هنا
 
 def main():
     parser = argparse.ArgumentParser(description="AI-Dataset-Manager CLI Tool")
@@ -11,21 +11,16 @@ def main():
 
     if args.action == "load":
         if args.file_type == "json":
-            data = data_format_support.load_json(args.file_path)
+            data = load_json(args.file_path)  # استدعاء الدالة هنا
             print(data)
         elif args.file_type == "csv":
-            data = data_format_support.load_csv(args.file_path)
+            data = load_csv(args.file_path)  # استدعاء الدالة هنا
             print(data)
     elif args.action == "save":
-        sample_data = {"name": "Surprise AI", "type": "tool"}  # بيانات ثابتة للتجربة
         if args.file_type == "json":
-            data_format_support.save_json(sample_data, args.file_path)
-            print("JSON data saved successfully.")
+            save_json({}, args.file_path)  # حفظ البيانات بشكل فارغ كمثال
         elif args.file_type == "csv":
-            import pandas as pd
-            df = pd.DataFrame([sample_data])
-            data_format_support.save_csv(df, args.file_path)
-            print("CSV data saved successfully.")
+            save_csv({}, args.file_path)  # حفظ البيانات بشكل فارغ كمثال
 
-if __name__ == "__main__":
+if name == "main":
     main()
