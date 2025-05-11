@@ -1,50 +1,53 @@
 import argparse
 import json
-from ai_dataset_manager.data_management import add_data_to_json, add_data_to_csv, search_json, search_csv  # استيراد الدوال اللازمة
+from ai_dataset_manager.data_management import add_data_to_json, add_data_to_csv, search_json, search_csv, save_json, save_csv
 
 def main():
-    parser = argparse.ArgumentParser(description="إضافة البيانات أو البحث في ملف JSON أو CSV")
+    parser = argparse.ArgumentParser(description="Add data to a JSON or CSV file")
     
-    # إضافة الخيار save و add و search
-    parser.add_argument('action', choices=['save', 'add', 'search'], help="العملية التي تريد تنفيذها")
-    parser.add_argument('format', choices=['json', 'csv'], help="تنسيق الملف")
-    parser.add_argument('file_path', help="مسار الملف")
-    parser.add_argument('--data', help="البيانات لإضافتها (فقط للـ add)", required=False)
-    parser.add_argument('--query', help="الكلمة المفتاحية للبحث", required=False)
+    # Add save, add, and search actions
+    parser.add_argument('action', choices=['save', 'add', 'search'], help="The action you want to perform")
+    parser.add_argument('format', choices=['json', 'csv'], help="The file format")
+    parser.add_argument('file_path', help="The file path")
+    parser.add_argument('--data', help="Data to add or search for (only for add and search)", required=False)
+    parser.add_argument('--query', help="The query keyword for search (only for search)", required=False)
 
     args = parser.parse_args()
 
     if args.action == 'add':
         if args.format == 'json':
-            # تحويل البيانات من سلسلة إلى قاموس
-            if args.data:
-                data = json.loads(args.data)
-                add_data_to_json(data, args.file_path)  # إضافة البيانات إلى ملف JSON
-            else:
-                print("يرجى توفير البيانات باستخدام --data.")
+            data = json.loads(args.data)
+            add_data_to_json(data, args.file_path)
+            print("Data successfully added to JSON file.")
         elif args.format == 'csv':
-            # تحويل البيانات من سلسلة إلى قاموس
-            if args.data:
-                data = json.loads(args.data)
-                add_data_to_csv(data, args.file_path)  # إضافة البيانات إلى ملف CSV
-            else:
-                print("يرجى توفير البيانات باستخدام --data.")
+            data = json.loads(args.data)
+            add_data_to_csv(data, args.file_path)
+            print("Data successfully added to CSV file.")
     
     elif args.action == 'search':
-        if args.query:
-            if args.format == 'json':
-                result = search_json(args.query, args.file_path)  # البحث في ملف JSON
-            elif args.format == 'csv':
-                result = search_csv(args.query, args.file_path)  # البحث في ملف CSV
-            
-            if result:
-                print("النتائج:")
-                for item in result:
-                    print(item)
+        if not args.query:
+            print("Please provide a query keyword using --query")
+            return
+        if args.format == 'json':
+            results = search_json(args.query, args.file_path)
+            if results:
+                print("Found results in JSON file:", results)
             else:
-                print("لم يتم العثور على نتائج.")
-        else:
-            print("يرجى توفير كلمة بحث باستخدام --query.")
+                print("No results found in JSON file.")
+        elif args.format == 'csv':
+            results = search_csv(args.query, args.file_path)
+            if results:
+                print("Found results in CSV file:", results)
+            else:
+                print("No results found in CSV file.")
+    
+    elif args.action == 'save':
+        if args.format == 'json':
+            save_json([], args.file_path)
+            print("JSON file saved successfully.")
+        elif args.format == 'csv':
+            save_csv([], args.file_path)
+            print("CSV file saved successfully.")
 
 
 
